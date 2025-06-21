@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Final de Análisis</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1, h2 { color: #2E86C1; }
+        pre { white-space: pre-wrap; background-color: #f4f4f4; padding: 15px; border-radius: 5px; }
+        img { border: 1px solid #ddd; border-radius: 5px; }
+        .grafico { margin-bottom: 40px; }
+    </style>
+</head>
+<body>
+    <h1>📊 Reporte Final de Análisis de Datos</h1>
+    <p><strong>Fecha:</strong> 20/06/2025 23:03</p>
+
+    <h2>🎯 Consideraciones del Usuario</h2>
+    <p>La variable objetivo es 'production_rate'</p>
+
+    <h2>🧼 Proceso de Limpieza Aplicado</h2>
+    <ul>
+        <li><strong>Paso 1:</strong> remove_columns - Elimino las columnas 'id' y 'well_name'. 'id' es un identificador sin valor predictivo. 'well_name' tiene demasiadas categorías únicas y no aporta información útil en su forma actual.</li><li><strong>Paso 2:</strong> encode_categorical_columns - Codifico las columnas categóricas 'location' y 'technology_level' usando One-Hot Encoding para convertirlas en variables numéricas que puedan ser utilizadas en modelos de machine learning.</li><li><strong>Paso 3:</strong> standardize_numeric_columns - Estandarizo las columnas numéricas utilizando Z-score para mejorar el rendimiento de los modelos de machine learning.</li><li><strong>Paso 4:</strong> no_limpieza_necesaria - El dataset parece estar limpio y preprocesado. No hay valores nulos, las variables numéricas están estandarizadas y las categóricas codificadas. Listo para análisis y modelado.</li>
+    </ul>
+
+    <h2>💡 Insights Generados</h2>
+    <pre>
+# 📊 ANÁLISIS COMPLETO DEL DATASET DE TRANSACCIONES
+
+## 📈 MÉTRICAS CLAVE
+- **Filas procesadas**: 65,000
+- **Columnas analizadas**: 35
+- **Completitud de datos**: 100.0%
+- **Variables numéricas**: 23
+- **Variables categóricas**: 0
+- **Pasos de limpieza aplicados**: 4
+
+---
+
+¡Absolutamente! Aquí tienes un análisis exhaustivo del dataset, estructurado para proporcionar insights valiosos y recomendaciones accionables:
+
+**I. Resumen Ejecutivo**
+
+El dataset, compuesto por 65,000 registros y 35 columnas, describe características de pozos petroleros y su producción. Tras una limpieza y preprocesamiento que incluyó la eliminación de identificadores irrelevantes, codificación one-hot de variables categóricas y estandarización de variables numéricas, el dataset se encuentra en un estado óptimo para el análisis y modelado. La principal correlación identificada es entre el costo de perforación y la tasa de producción, lo que sugiere una relación directa entre la inversión y el rendimiento.
+
+**II. Análisis Detallado del Dataset**
+
+**A. Estructura y Calidad de los Datos**
+
+*   **Completitud:** El dataset es completo, sin valores nulos, lo que facilita el análisis sin necesidad de imputación.
+*   **Tipos de Datos:** La correcta tipificación de las columnas (numéricas y booleanas) permite un manejo eficiente de los datos en análisis posteriores.
+*   **Estandarización:** La estandarización de las variables numéricas mediante Z-score es crucial para modelos de machine learning que son sensibles a la escala de las variables.
+
+**B. Resumen Estadístico**
+
+*   **Variables Numéricas:**
+    *   Las variables estandarizadas tienen una media cercana a cero y una desviación estándar de uno, lo cual es esperado después de la estandarización.
+    *   La variable `production_rate` muestra una distribución con un rango amplio, lo que indica variabilidad en la producción de los pozos.
+*   **Variables Categóricas:**
+    *   Las variables `location_*` y `technology_level_*` representan la codificación one-hot de las variables originales, lo que permite su inclusión en modelos cuantitativos.
+    *   La alta frecuencia de "False" en las columnas `location_*` sugiere un desbalance en la distribución de las ubicaciones, lo cual podría afectar el rendimiento de modelos predictivos si no se maneja adecuadamente.
+
+**C. Análisis de Correlaciones**
+
+*   La fuerte correlación positiva (0.876) entre `drilling_cost` y `production_rate` es un hallazgo clave. Esto indica que pozos con mayores costos de perforación tienden a tener mayores tasas de producción. Este insight es valioso para la toma de decisiones de inversión.
+
+**III. Insights Clave y Oportunidades**
+
+1.  **Relación Costo-Producción:** La fuerte correlación entre el costo de perforación y la tasa de producción sugiere que invertir en perforaciones más costosas podría ser justificado por un aumento en la producción. Sin embargo, es crucial analizar si esta relación es lineal y si existen rendimientos decrecientes a medida que aumenta el costo de perforación.
+2.  **Optimización de la Producción:** Identificar los factores que influyen en la tasa de producción es fundamental para optimizar el rendimiento de los pozos. Variables como la profundidad, la porosidad, la permeabilidad y la edad del reservorio podrían ser predictores importantes de la producción.
+3.  **Impacto de la Tecnología:** La variable `technology_level` (codificada como `technology_level_High` y `technology_level_Low`) podría tener un impacto significativo en la producción y otros factores como el costo de mantenimiento y el impacto ambiental. Analizar estas relaciones podría justificar la inversión en tecnologías más avanzadas.
+4.  **Análisis de Ubicación:** Aunque las variables de ubicación están desbalanceadas, es importante investigar si ciertas ubicaciones tienen un rendimiento superior a otras. Esto podría influir en las decisiones de perforación y asignación de recursos.
+5.  **Gestión de Riesgos:** Variables como `environmental_impact_score` y `safety_incidents` son cruciales para la gestión de riesgos. Analizar cómo estas variables se relacionan con otras características del pozo y la producción podría ayudar a identificar áreas de mejora y reducir los riesgos operativos.
+
+**IV. Próximos Pasos y Recomendaciones**
+
+1.  **Modelado Predictivo:**
+    *   **Regresión:** Construir un modelo de regresión para predecir la tasa de producción (`production_rate`) en función de las demás variables. Esto permitiría identificar los factores más importantes que influyen en la producción y optimizar la planificación de la perforación.
+    *   **Clasificación:** Desarrollar un modelo de clasificación para predecir el nivel de riesgo (alto/bajo) en función de las variables de impacto ambiental y seguridad. Esto podría ayudar a priorizar las intervenciones y reducir los riesgos operativos.
+2.  **Análisis de Segmentación:**
+    *   Utilizar técnicas de clustering para segmentar los pozos en función de sus características y rendimiento. Esto permitiría identificar grupos de pozos con perfiles similares y aplicar estrategias de optimización específicas para cada grupo.
+3.  **Análisis de Sensibilidad:**
+    *   Realizar un análisis de sensibilidad para determinar cómo los cambios en las variables de entrada (por ejemplo, costo de perforación, tecnología, ubicación) afectan la tasa de producción. Esto ayudaría a tomar decisiones informadas sobre la inversión y la asignación de recursos.
+4.  **Manejo del Desbalance:**
+    *   Considerar técnicas de sobremuestreo (SMOTE) o submuestreo para equilibrar las clases en las variables de ubicación, si se encuentra que el desbalance afecta negativamente el rendimiento de los modelos.
+5.  **Análisis de Interacción:**
+    *   Explorar las interacciones entre variables. Por ejemplo, la interacción entre la tecnología y la ubicación podría revelar que ciertas tecnologías son más efectivas en ciertas ubicaciones.
+
+**V. Conclusiones**
+
+El dataset proporciona una rica fuente de información para optimizar la producción de pozos petroleros y gestionar los riesgos operativos. La fuerte correlación entre el costo de perforación y la tasa de producción es un hallazgo clave que justifica una mayor investigación. Los próximos pasos deberían centrarse en el modelado predictivo, el análisis de segmentación y el análisis de sensibilidad para identificar oportunidades de mejora y tomar decisiones informadas sobre la inversión y la asignación de recursos.
+
+---
+
+## 🛠️ PROCESO DE LIMPIEZA APLICADO:
+✅ **Paso 1**: remove_columns - Elimino las columnas 'id' y 'well_name'. 'id' es un identificador sin valor predictivo. 'well_name' tiene demasiadas categorías únicas y no aporta información útil en su forma actual.
+✅ **Paso 2**: encode_categorical_columns - Codifico las columnas categóricas 'location' y 'technology_level' usando One-Hot Encoding para convertirlas en variables numéricas que puedan ser utilizadas en modelos de machine learning.
+✅ **Paso 3**: standardize_numeric_columns - Estandarizo las columnas numéricas utilizando Z-score para mejorar el rendimiento de los modelos de machine learning.
+✅ **Paso 4**: no_limpieza_necesaria - El dataset parece estar limpio y preprocesado. No hay valores nulos, las variables numéricas están estandarizadas y las categóricas codificadas. Listo para análisis y modelado.
+        </pre>
+
+    <h2>📈 Visualizaciones Generadas</h2>
+
+    <div class="grafico">
+        <img src="../graficos_generados\grafico_1.png" width="700px" alt="grafico_1">
+        <p><strong>grafico_1</strong></p>
+    </div>
+
+    <div class="grafico">
+        <img src="../graficos_generados\grafico_2.png" width="700px" alt="grafico_2">
+        <p><strong>grafico_2</strong></p>
+    </div>
+
+    <div class="grafico">
+        <img src="../graficos_generados\grafico_3.png" width="700px" alt="grafico_3">
+        <p><strong>grafico_3</strong></p>
+    </div>
+
+    <div class="grafico">
+        <img src="../graficos_generados\grafico_4.png" width="700px" alt="grafico_4">
+        <p><strong>grafico_4</strong></p>
+    </div>
+
+    <div class="grafico">
+        <img src="../graficos_generados\grafico_5.png" width="700px" alt="grafico_5">
+        <p><strong>grafico_5</strong></p>
+    </div>
+
+</body>
+</html>
