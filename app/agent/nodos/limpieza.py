@@ -1,15 +1,14 @@
 from agent.state_types import AgentState
-from agent.utils.limpieza_tools import AVAILABLE_TOOLS,textual_description_of_tools, SYSTEM_PROMPT
-from agent.utils.prompts import construir_input_llm
+from agent.utils.limpieza_tools import AVAILABLE_TOOLS,textual_description_of_tools
+from agent.utils.prompts import construir_input_llm, SYSTEM_PROMPT, dataset_info_prompt
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
-from verificar_estructura import verificar_estructura
-from resumen_estadistico import resumen_estadistico
+from agent.nodos.verificar_estructura import verificar_estructura
+from agent.nodos.resumen_estadistico import resumen_estadistico
 from langchain_google_genai import ChatGoogleGenerativeAI
 import traceback
 import json
 import pandas as pd
-
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+from agent.state import  llm
 
 tools = AVAILABLE_TOOLS
 
@@ -31,10 +30,10 @@ def analisis_limpieza(state: AgentState) -> AgentState:
         print(f"🛠️  Tools disponibles: {len(tools)}")
         
         # Crear el mensaje con la información del dataset
-        dataset_info = construir_input_llm(
+        dataset_info = dataset_info_prompt(
             input_llm=input_llm,
             historial_limpieza=historial_limpieza,
-            textual_description_of_tools=textual_description_of_tools(tools)
+            textual_description_of_tools=textual_description_of_tools
         )
         print("🤖 Consultando al LLM para decisión de limpieza...")
         
